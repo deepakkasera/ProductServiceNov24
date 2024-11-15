@@ -25,7 +25,7 @@ public class ProductController {
     // http://localhost:8080/products => Get all the products
     @GetMapping
     public List<Product> getAllProducts() {
-        return new ArrayList<>();
+        return productService.getAllProducts();
     }
 
     @PostMapping
