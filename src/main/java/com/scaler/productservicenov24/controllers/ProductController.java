@@ -1,6 +1,7 @@
 package com.scaler.productservicenov24.controllers;
 
 import com.scaler.productservicenov24.models.Product;
+import com.scaler.productservicenov24.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,11 +10,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+    private ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     // http://localhost:8080/products/1 => Get a single product with id = 1;
     @GetMapping("/{id}")
     public Product getSingleProduct(@PathVariable("id") Long productId) {
-        return new Product();
+        return productService.getSingleProduct(productId);
     }
 
     // http://localhost:8080/products => Get all the products
@@ -23,7 +29,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product createProduct() {
+    public Product createProduct(@RequestBody Product product) {
         return new Product();
     }
 
