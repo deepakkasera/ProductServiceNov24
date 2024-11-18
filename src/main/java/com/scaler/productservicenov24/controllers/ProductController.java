@@ -1,10 +1,12 @@
 package com.scaler.productservicenov24.controllers;
 
+import com.scaler.productservicenov24.exceptions.ProductNotFoundException;
 import com.scaler.productservicenov24.models.Product;
 import com.scaler.productservicenov24.services.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,8 +20,26 @@ public class ProductController {
 
     // http://localhost:8080/products/1 => Get a single product with id = 1;
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long productId) {
-        return productService.getSingleProduct(productId);
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
+//        try {
+//            return new ResponseEntity<>(
+//                    productService.getSingleProduct(productId),
+//                    HttpStatus.OK
+//            );
+//        } catch (ProductNotFoundException e) {
+//            return new ResponseEntity<>(
+//                    HttpStatus.NOT_FOUND
+//            );
+//        } catch (RuntimeException e) {
+//            return new ResponseEntity<>(
+//                    HttpStatus.BAD_REQUEST
+//            );
+//        }
+
+        return new ResponseEntity<>(
+                productService.getSingleProduct(productId),
+                HttpStatus.OK
+        );
     }
 
     // http://localhost:8080/products => Get all the products
@@ -47,5 +67,10 @@ public class ProductController {
     @PutMapping("{id}") // Replace the entire Product object.
     public void replaceProduct(@PathVariable("id") Long productId, @RequestBody Product product) {
 
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    private String handleProductNotFoundException() {
+        return "Product not found.";
     }
 }

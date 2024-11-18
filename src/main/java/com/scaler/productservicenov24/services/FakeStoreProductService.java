@@ -1,6 +1,7 @@
 package com.scaler.productservicenov24.services;
 
 import com.scaler.productservicenov24.dtos.FakeStoreProductDto;
+import com.scaler.productservicenov24.exceptions.ProductNotFoundException;
 import com.scaler.productservicenov24.models.Category;
 import com.scaler.productservicenov24.models.Product;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,16 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product getSingleProduct(Long productId) {
-        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
-                "https://fakestoreapi.com/products/" + productId,
-                FakeStoreProductDto.class
-        );
+    public Product getSingleProduct(Long productId) throws ProductNotFoundException {
+        throw new ProductNotFoundException("Something went wrong");
 
-        //Convert FakeStoreProductDto object into Product object.
-        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
+//        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
+//                "https://fakestoreapi.com/products/" + productId,
+//                FakeStoreProductDto.class
+//        );
+//
+//        //Convert FakeStoreProductDto object into Product object.
+//        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
     }
 
     @Override
