@@ -32,6 +32,4 @@ public class GlobalExceptionHandler {
     private void handleArrayIndexOutOfBoundException() {
 
     }
-
-
 }

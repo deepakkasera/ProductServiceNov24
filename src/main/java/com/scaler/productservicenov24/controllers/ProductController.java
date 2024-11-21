@@ -69,8 +69,8 @@ public class ProductController {
 
     }
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    private String handleProductNotFoundException() {
-        return "Product not found.";
-    }
+//    @ExceptionHandler(ProductNotFoundException.class)
+//    private String handleProductNotFoundException() {
+//        return "Product not found.";
+//    }
 }

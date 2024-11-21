@@ -1,4 +1,4 @@
-package com.scaler.productservicenov24.models;
+package com.scaler.productservicenov24.inheritanceDemo.mappedsuperclass;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,10 +10,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseModel {
+public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO INC
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long createdAt;
-    private Long lastUpdatedAt;
+    private String name;
+    private String email;
+    private String password;
 }
