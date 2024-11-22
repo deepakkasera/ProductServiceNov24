@@ -1,14 +1,18 @@
 package com.scaler.productservicenov24.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity(name = "products")
 public class Product extends BaseModel {
+//    @Column(unique = true, nullable = false)
     private String title;
     private Double price;
     @ManyToOne

@@ -2,7 +2,9 @@ package com.scaler.productservicenov24.services;
 
 import com.scaler.productservicenov24.controllers.ProductController;
 import com.scaler.productservicenov24.exceptions.ProductNotFoundException;
+import com.scaler.productservicenov24.models.Category;
 import com.scaler.productservicenov24.models.Product;
+import com.scaler.productservicenov24.repositories.CategoryRepository;
 import com.scaler.productservicenov24.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -16,9 +18,12 @@ import java.util.Optional;
 //@Primary
 public class SelfProductService implements ProductService {
     private ProductRepository productRepository;
+    private CategoryRepository categoryRepository;
 
-    public SelfProductService(ProductRepository productRepository) {
+    public SelfProductService(ProductRepository productRepository,
+                              CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -40,6 +45,26 @@ public class SelfProductService implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
+        if (product.getCategory() != null) {
+            if (product.getCategory().getId() == null) {
+                //Create a Category first.
+                Category category = product.getCategory();
+
+                String categoryValue = category.getValue();
+
+                Optional<Category> optionalCategory = categoryRepository.findByValue(categoryValue);
+
+                if (optionalCategory.isEmpty()) {
+                    category = categoryRepository.save(category);
+                    product.setCategory(category);
+                } else {
+                    product.setCategory(optionalCategory.get());
+                }
+            }
+        } else {
+            throw new RuntimeException("Category can't be empty while creating a Product.");
+        }
+
         return productRepository.save(product);
     }
 
