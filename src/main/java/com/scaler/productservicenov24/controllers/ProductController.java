@@ -21,7 +21,7 @@ public class ProductController {
 
     // http://localhost:8080/products/1 => Get a single product with id = 1;
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
+    public Product getSingleProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
 //        try {
 //            return new ResponseEntity<>(
 //                    productService.getSingleProduct(productId),
@@ -37,10 +37,14 @@ public class ProductController {
 //            );
 //        }
 
-        return new ResponseEntity<>(
-                productService.getSingleProduct(productId),
-                HttpStatus.OK
-        );
+//        return new ResponseEntity<>(
+//                productService.getSingleProduct(productId),
+//                HttpStatus.OK
+//        );
+
+        System.out.println("Debugging");
+
+        return productService.getSingleProduct(productId);
     }
 
     // http://localhost:8080/products => Get all the products
