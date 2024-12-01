@@ -1,5 +1,6 @@
 package com.scaler.productservicenov24.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -12,7 +13,7 @@ public class Product extends BaseModel {
 //    @Column(unique = true, nullable = false)
     private String title;
     private Double price;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
     private String description;
     private String image;

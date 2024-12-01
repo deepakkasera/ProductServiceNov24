@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("selfProductService")
-@Primary
+//@Primary
 public class SelfProductService implements ProductService {
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
@@ -45,25 +45,27 @@ public class SelfProductService implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
-        if (product.getCategory() != null) {
-            if (product.getCategory().getId() == null) {
-                //Create a Category first.
-                Category category = product.getCategory();
+//        if (product.getCategory() != null) {
+//            if (product.getCategory().getId() == null) {
+//                //Create a Category first.
+//                Category category = product.getCategory();
+//
+//                String categoryValue = category.getValue();
+//
+//                Optional<Category> optionalCategory = categoryRepository.findByValue(categoryValue);
+//
+//                if (optionalCategory.isEmpty()) {
+//                    category = categoryRepository.save(category);
+//                    product.setCategory(category);
+//                } else {
+//                    product.setCategory(optionalCategory.get());
+//                }
+//            }
+//        } else {
+//            throw new RuntimeException("Category can't be empty while creating a Product.");
+//        }
 
-                String categoryValue = category.getValue();
-
-                Optional<Category> optionalCategory = categoryRepository.findByValue(categoryValue);
-
-                if (optionalCategory.isEmpty()) {
-                    category = categoryRepository.save(category);
-                    product.setCategory(category);
-                } else {
-                    product.setCategory(optionalCategory.get());
-                }
-            }
-        } else {
-            throw new RuntimeException("Category can't be empty while creating a Product.");
-        }
+        System.out.println("DEBUG");
 
         return productRepository.save(product);
     }

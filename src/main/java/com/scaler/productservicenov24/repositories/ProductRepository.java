@@ -1,8 +1,11 @@
 package com.scaler.productservicenov24.repositories;
 
 import com.scaler.productservicenov24.models.Product;
+import com.scaler.productservicenov24.repositories.projections.ProductWithTitleAndPrice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,4 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAll();
 
     Product save(Product product);
+
+    @Query("select p.title as title, p.price as price from products p")
+    List<ProductWithTitleAndPrice> getTitleAndPriceById();
 }

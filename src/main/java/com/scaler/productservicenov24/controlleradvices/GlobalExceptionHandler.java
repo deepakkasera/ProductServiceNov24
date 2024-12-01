@@ -23,10 +23,10 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public void handleRunTimeException() {
-
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    public void handleRunTimeException() {
+//
+//    }
 
     @ExceptionHandler(ArrayIndexOutOfBoundsException.class)
     private void handleArrayIndexOutOfBoundException() {

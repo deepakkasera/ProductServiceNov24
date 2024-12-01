@@ -3,11 +3,13 @@ package com.scaler.productservicenov24.controllers;
 import com.scaler.productservicenov24.exceptions.ProductNotFoundException;
 import com.scaler.productservicenov24.models.Product;
 import com.scaler.productservicenov24.services.ProductService;
+import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -42,14 +44,27 @@ public class ProductController {
 //                HttpStatus.OK
 //        );
 
-        System.out.println("Debugging");
+//        System.out.println("Debugging");
 
-        return productService.getSingleProduct(productId);
+        Product product = productService.getSingleProduct(productId); // @7891
+        product.setTitle("iPhone 15 Pro Max");
+
+        return product;
     }
 
     // http://localhost:8080/products => Get all the products
     @GetMapping
     public List<Product> getAllProducts() {
+        // @9876
+//        List<Product> products = productService.getAllProducts(); // [@123, @865, @654]
+//
+//        List<Product> newProductList = new ArrayList<>();
+//        newProductList.add(products.get(0));
+//        newProductList.add(products.get(1));
+//        newProductList.add(products.get(2));
+//
+//        newProductList.get(0).setTitle("Random Title");
+
         return productService.getAllProducts();
     }
 
