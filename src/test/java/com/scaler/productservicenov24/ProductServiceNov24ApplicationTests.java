@@ -15,40 +15,40 @@ import java.util.Optional;
 
 @SpringBootTest
 class ProductServiceNov24ApplicationTests {
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Test
-    void contextLoads() {
-    }
-
-    @Test
-    @Transactional
-    void testQuery() {
-        List<ProductWithTitleAndPrice> productsWithTitleAndPrice =
-                productRepository.getTitleAndPriceById();
-
-        for (ProductWithTitleAndPrice productWithTitleAndPrice : productsWithTitleAndPrice) {
-            System.out.println(productWithTitleAndPrice.getTitle());
-            System.out.println(productWithTitleAndPrice.getPrice());
-            System.out.println("-----------");
-        }
-
-//        categoryRepository.deleteById(2L);
-
-        //T1
-        Optional<Category> optionalCategory = categoryRepository.findById(1L);
-
-        //T2
-        List<Product> products = optionalCategory.get().getProducts();
-
-        for (Product product : products) {
-            System.out.println(product.getTitle());
-        }
-
-        System.out.println("DEBUG");
-    }
+//    @Autowired
+//    private ProductRepository productRepository;
+//
+//    @Autowired
+//    private CategoryRepository categoryRepository;
+//
+//    @Test
+//    void contextLoads() {
+//    }
+//
+//    @Test
+//    @Transactional
+//    void testQuery() {
+//        List<ProductWithTitleAndPrice> productsWithTitleAndPrice =
+//                productRepository.getTitleAndPriceById();
+//
+//        for (ProductWithTitleAndPrice productWithTitleAndPrice : productsWithTitleAndPrice) {
+//            System.out.println(productWithTitleAndPrice.getTitle());
+//            System.out.println(productWithTitleAndPrice.getPrice());
+//            System.out.println("-----------");
+//        }
+//
+////        categoryRepository.deleteById(2L);
+//
+//        //T1
+//        Optional<Category> optionalCategory = categoryRepository.findById(1L);
+//
+//        //T2
+////        List<Product> products = optionalCategory.get().getProducts();
+//
+////        for (Product product : products) {
+////            System.out.println(product.getTitle());
+////        }
+//
+//        System.out.println("DEBUG");
+//    }
 }

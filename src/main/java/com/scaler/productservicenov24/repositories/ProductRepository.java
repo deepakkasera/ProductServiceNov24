@@ -2,6 +2,8 @@ package com.scaler.productservicenov24.repositories;
 
 import com.scaler.productservicenov24.models.Product;
 import com.scaler.productservicenov24.repositories.projections.ProductWithTitleAndPrice;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +18,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     //select * from products where id = productId;
 
     @Override
-    List<Product> findAll();
+    Page<Product> findAll(Pageable pageable);
+    // select * from products;
+    // This query should be paginated.
 
     Product save(Product product);
 

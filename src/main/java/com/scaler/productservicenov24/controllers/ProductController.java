@@ -5,6 +5,7 @@ import com.scaler.productservicenov24.models.Product;
 import com.scaler.productservicenov24.services.ProductService;
 import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +55,7 @@ public class ProductController {
 
     // http://localhost:8080/products => Get all the products
     @GetMapping
-    public List<Product> getAllProducts() {
+    public Page<Product> getAllProducts(@RequestParam int pageNumber, @RequestParam int pageSize) {
         // @9876
 //        List<Product> products = productService.getAllProducts(); // [@123, @865, @654]
 //
@@ -65,7 +66,7 @@ public class ProductController {
 //
 //        newProductList.get(0).setTitle("Random Title");
 
-        return productService.getAllProducts();
+        return productService.getAllProducts(pageNumber, pageSize);
     }
 
     @PostMapping

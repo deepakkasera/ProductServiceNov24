@@ -4,6 +4,8 @@ import com.scaler.productservicenov24.dtos.FakeStoreProductDto;
 import com.scaler.productservicenov24.exceptions.ProductNotFoundException;
 import com.scaler.productservicenov24.models.Category;
 import com.scaler.productservicenov24.models.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,19 +23,19 @@ public class FakeStoreProductService implements ProductService {
 
     @Override
     public Product getSingleProduct(Long productId) throws ProductNotFoundException {
-        throw new ProductNotFoundException("Something went wrong");
+//        throw new ProductNotFoundException("Something went wrong");
 
-//        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
-//                "https://fakestoreapi.com/products/" + productId,
-//                FakeStoreProductDto.class
-//        );
-//
-//        //Convert FakeStoreProductDto object into Product object.
-//        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
+        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
+                "https://fakestoreapi.com/products/" + productId,
+                FakeStoreProductDto.class
+        );
+
+        //Convert FakeStoreProductDto object into Product object.
+        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public Page<Product> getAllProducts(int pageNumber, int pageSize) {
 
         //Type Erasure
         FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject(
@@ -46,7 +48,7 @@ public class FakeStoreProductService implements ProductService {
             products.add(convertFakeStoreProductDtoToProduct(fakeStoreProductDto));
         }
 
-        return products;
+        return new PageImpl<>(products);
     }
 
     @Override
