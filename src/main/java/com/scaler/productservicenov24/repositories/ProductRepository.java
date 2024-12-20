@@ -26,4 +26,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select p.title as title, p.price as price from products p")
     List<ProductWithTitleAndPrice> getTitleAndPriceById();
+
+    List<Product> findAllByTitle(String title, Pageable pageable);
 }

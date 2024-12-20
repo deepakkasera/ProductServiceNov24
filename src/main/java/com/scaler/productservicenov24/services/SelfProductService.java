@@ -50,6 +50,14 @@ public class SelfProductService implements ProductService {
                         Sort.by("price").ascending()
                 )
         );
+
+//        productRepository.findAllByTitle(
+//                title,
+//                PageRequest.of(
+//                        pageNumber,
+//                        pageSize
+//                )
+//        );
     }
 
     @Override
