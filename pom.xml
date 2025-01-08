@@ -85,6 +85,12 @@
             <artifactId>flyway-mysql</artifactId>
             <version>11.0.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>3.4.1</version>
+        </dependency>
     </dependencies>
 
     <build>

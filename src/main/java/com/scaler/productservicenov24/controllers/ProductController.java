@@ -18,7 +18,7 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
 
-    public ProductController(@Qualifier("selfProductService") ProductService productService) {
+    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -48,7 +48,7 @@ public class ProductController {
 //        System.out.println("Debugging");
 
         Product product = productService.getSingleProduct(productId); // @7891
-        product.setTitle("iPhone 15 Pro Max");
+//        product.setTitle("iPhone 15 Pro Max");
 
         return product;
     }
