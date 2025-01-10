@@ -28,25 +28,31 @@ public class FakeStoreProductService implements ProductService {
     public Product getSingleProduct(Long productId) throws ProductNotFoundException {
 //        throw new ProductNotFoundException("Something went wrong");
 
-        //Try to fetch the product from REDIS.
-        Product product = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCT_" + productId);
-
-        if (product != null) {
-            return product;
-        }
+//        //Try to fetch the product from REDIS.
+//        Product product = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCT_" + productId);
+//
+//        if (product != null) {
+//            return product;
+//        }
 
         //If product is not present in the REDIS, then fetch it from Fakestore and store it in the redis and then return.
-        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
-                "https://fakestoreapi.com/products/" + productId,
-                FakeStoreProductDto.class
-        );
+//        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject(
+//                "https://fakestoreapi.com/products/" + productId,
+//                FakeStoreProductDto.class
+//        );
 
-        product = convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
+        //product = convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
 
-        redisTemplate.opsForHash().put("PRODUCTS", "PRODUCT_" + productId, product);
+        //redisTemplate.opsForHash().put("PRODUCTS", "PRODUCT_" + productId, product);
+
+
+
+        //Make a call to UserService
+        String response = restTemplate.getForObject("http://userservicedec24/users/sample", String.class);
 
         //Convert FakeStoreProductDto object into Product object.
-        return product;
+        //return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
+        return new Product();
     }
 
     @Override
